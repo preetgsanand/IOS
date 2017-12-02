@@ -1,0 +1,6 @@
+framework module Pods_ApiDbJsonApp {
+  umbrella header "Pods-ApiDbJsonApp-umbrella.h"
+
+  export *
+  module * { export * }
+}
