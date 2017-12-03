@@ -29,6 +29,7 @@ enum endPoints {
     
     case seasonDetails(api_key : String, tv_id : Int, season_number : Int, language : String)
 
+    case peopleDetail(api_key : String, people_id : Int, language : String, append_to_response : String)
     
     func provideValues() -> (url : String, parameters : Parameters, httpMethod : HTTPMethod, parseCode : Int) {
         switch self {
@@ -108,9 +109,14 @@ enum endPoints {
             let params = parameters(api_key: api_key, language: language)
             return (url : url, parameters : params, httpMethod : HTTPMethod.get, parseCode : 0)
         
+        case .peopleDetail(let api_key, let people_id, let language, let append_to_response):
+            let url = BASE_URL + "/person/" + String(people_id)
+            let params = parameters(api_key: api_key, language: language, append_to_response : append_to_response)
+            return (url : url, parameters : params, httpMethod : HTTPMethod.get, parseCode : 7)
         }
     
     }
+    
     
     private func parameters(api_key : String, language : String) -> Parameters {
         let parameters : Parameters = [

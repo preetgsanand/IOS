@@ -10,14 +10,16 @@ class TvDetailPresenter : PresenterApiProtocol{
     var navigation : TvNavigationProtocol
     var tv : Int
     var api : BasicApiServiceProtocol
+    var peopleNavigation : PeopleNavigation
     
     init(tv : Int, view : TvDetailProtocol, loader : LoaderProtocol, navigation : TvNavigationProtocol,
-         api : BasicApiServiceProtocol) {
+         api : BasicApiServiceProtocol, peopleNavigation : PeopleNavigation) {
         self.tv = tv
         self.loader = loader
         self.navigation = navigation
         self.view = view
         self.api = api
+        self.peopleNavigation = peopleNavigation
     }
     
     func viewDidLoad() {
@@ -53,7 +55,8 @@ class TvDetailPresenter : PresenterApiProtocol{
                         seasonViewModels.append(seasonViewModel)
                     }
                     for i in 0..<cast.count {
-                        let castViewModel = CastViewModel(name : cast[i].name,
+                        let castViewModel = CastViewModel(id : cast[i].id,
+                                                          name : cast[i].name,
                                                           character : cast[i].character,
                                                           profile_path : cast[i].profile_path)
                         castViewModels.append(castViewModel)
@@ -68,6 +71,9 @@ class TvDetailPresenter : PresenterApiProtocol{
         }
     }
     
+    func personSelected(viewModel : CastViewModel) {
+        peopleNavigation.presentPeopleDetail(fromView: view, peopleId: viewModel.id)
+    }
     
     func seasonMoreClicked(seasons : [SeasonViewModel]) {
         navigation.presentSeasonDetailModule(fromView: view, tvId: self.tv, seasons : seasons)

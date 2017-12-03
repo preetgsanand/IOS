@@ -40,7 +40,7 @@ class HomeNavigation : HomeNavigationProtocol {
 
     }
     
-    func presentGenreMovies(fromView: HomeProtocol, genreId : Int) {
+    func presentGenreMovies(fromView: Any?, genreId : Int) {
         if let source = fromView as? UIViewController {
             let genericViewController = createGenericMovieListModule(genreId: genreId)
             source.navigationController?.pushViewController(genericViewController, animated: true)

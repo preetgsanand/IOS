@@ -8,13 +8,16 @@ class MovieDetailPresenter : PresenterApiProtocol {
     var loader : LoaderProtocol
     var movieId : Int
     var api : BasicApiServiceProtocol
+    var peopleNavigation : PeopleNavigation
     
-    init(view : MovieDetailProtocol, loader : LoaderProtocol, movieId : Int, api : BasicApiServiceProtocol) {
+    init(view : MovieDetailProtocol, loader : LoaderProtocol, movieId : Int, api : BasicApiServiceProtocol, peopleNavigation : PeopleNavigation) {
         self.view = view
         self.loader = loader
         self.movieId = movieId
         self.api = api
+        self.peopleNavigation = peopleNavigation
     }
+    
 
     func viewDidLoad() {
         loader.showLoading()
@@ -42,7 +45,8 @@ class MovieDetailPresenter : PresenterApiProtocol {
                                                         release_date : movie.release_date)
         var castViewModels = [CastViewModel]()
         for i in 0..<cast.count {
-            let castViewModel = CastViewModel(name : cast[i].name,
+            let castViewModel = CastViewModel(id : cast[i].id,
+                                              name : cast[i].name,
                                               character : cast[i].character,
                                               profile_path : cast[i].profile_path)
             castViewModels.append(castViewModel)
@@ -52,6 +56,10 @@ class MovieDetailPresenter : PresenterApiProtocol {
         loader.hideLoading()
         view.setTitle(title: movie.title)
         
+    }
+    
+    func personSelected(viewModel : CastViewModel) {
+        peopleNavigation.presentPeopleDetail(fromView: view, peopleId: viewModel.id)
     }
     
     func publishApiResponse(_ success: Bool, _ code: Int, _ data: Any?) {

@@ -4,16 +4,17 @@ class People {
     internal(set) var gender : Int
     internal(set) var id : Int
     internal(set) var name : String
-    internal(set) var profile_path : String!
-    internal(set) var birthday : Date!
-    internal(set) var deathday : Date!
-    internal(set) var biography : String!
-    internal(set) var place_of_birth : String!
+    internal(set) var profile_path : String
+    internal(set) var birthday : Date?
+    internal(set) var deathday : Date?
+    internal(set) var biography : String?
+    internal(set) var place_of_birth : String?
+    internal(set) var credits : [PeopleCredit]?
     
     init(gender : Int,
          id : Int,
          name : String,
-         profile_path : String?) {
+         profile_path : String) {
         
     
         self.gender = gender
@@ -25,11 +26,13 @@ class People {
     func setDetails(birthday : Date,
                     deathday : Date,
                     biography : String,
-                    place_of_birth : String) {
+                    place_of_birth : String,
+                    credits : [PeopleCredit]) {
         self.birthday = birthday
         self.deathday = deathday
         self.biography = biography
         self.place_of_birth = place_of_birth
+        self.credits = credits
     }
 
 }
@@ -70,5 +73,25 @@ class Crew : People {
         self.job = job
         super.init(gender: gender, id: id, name: name, profile_path: profile_path)
 
+    }
+}
+
+class PeopleCredit {
+    var id : Int
+    var title : String
+    var character : String
+    var release_date : Date
+    var poster_path : String
+    
+    init(id : Int,
+         title : String,
+         character : String,
+         release_date : Date,
+         poster_path : String) {
+        self.id = id
+        self.title = title
+        self.character = character
+        self.poster_path = poster_path
+        self.release_date = release_date
     }
 }

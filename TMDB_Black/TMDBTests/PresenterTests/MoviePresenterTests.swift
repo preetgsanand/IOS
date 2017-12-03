@@ -44,7 +44,7 @@ class MoviePresenterTests: XCTestCase {
         let movieViewModel = MovieViewModel(id : 1,
                                             title : "It",
                                             vote_average : 5.6,
-                                            poster_url : "Poster Url")
+                                            poster_url : "Poster Url", release_date: Date())
         moviePresenter.movieSelected(movieViewModel: movieViewModel)
         XCTAssert(navigation.getDetailPresented() == true)
     }

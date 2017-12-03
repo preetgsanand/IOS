@@ -33,7 +33,8 @@ class TvNavigation : TvNavigationProtocol {
                                               view : tvDetailController,
                                               loader : tvDetailController,
                                               navigation : self,
-                                              api : BasicApiService())
+                                              api : BasicApiService(),
+                                              peopleNavigation : PeopleNavigation())
             
 
             tvDetailController.presenter = presenter

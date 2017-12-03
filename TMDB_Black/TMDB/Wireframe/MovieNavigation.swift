@@ -42,7 +42,8 @@ class MovieNavigation : MovieNavigationProtocol {
             let presenter = MovieDetailPresenter(view : movieDetailController,
                                                  loader : movieDetailController,
                                                  movieId : movieId,
-                                                 api : BasicApiService())
+                                                 api : BasicApiService(),
+                                                 peopleNavigation : PeopleNavigation())
             
             
             movieDetailController.movieDetailPresenter = presenter

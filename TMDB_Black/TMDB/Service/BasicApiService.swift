@@ -60,6 +60,8 @@ class BasicApiService : BasicApiServiceProtocol {
             return parseSeasonDetailJSON(seasonDetailJSON: json)
         case 6:
             return parseGenreList(genreListJSON: json["genres"].arrayValue)
+        case 7:
+            return parsePeopleDetailJSON(peopleDetailJSON: json)
         default:
             return nil
         }
@@ -265,6 +267,50 @@ class BasicApiService : BasicApiServiceProtocol {
                        air_date : air_date,
                        episode_number : episodeJSON["episode_number"].intValue)
     }
+    
+    
+    // People
+    
+    func parsePeopleDetailJSON(peopleDetailJSON : JSON) -> People{
+        let people = People(gender : peopleDetailJSON["gender"].intValue,
+                            id : peopleDetailJSON["id"].intValue,
+                            name : peopleDetailJSON["name"].stringValue,
+                            profile_path : peopleDetailJSON["profile_path"].stringValue)
+        
+        people.setDetails(birthday: DateUtils.stringToDate(dateString: peopleDetailJSON["birthday"].stringValue),
+                          deathday: DateUtils.stringToDate(dateString: peopleDetailJSON["deathday"].stringValue),
+                          biography: peopleDetailJSON["biography"].stringValue,
+                          place_of_birth: peopleDetailJSON["place_of_birth"].stringValue,
+                          credits: parsePeopleCreditListJSON(peopleCreditListJSON: peopleDetailJSON["credits"]["cast"].arrayValue))
+        return people
+    }
+    
+    
+    
+    func parsePeopleCreditListJSON(peopleCreditListJSON : [JSON]) -> [PeopleCredit]{
+        var peopleList = [PeopleCredit]()
+        
+        for i in 0..<peopleCreditListJSON.count {
+            peopleList.append(parsePeopleCreditJSON(peopleCreditJSON: peopleCreditListJSON[i]))
+        }
+        print(peopleList.count)
+        return peopleList
+    }
+    
+    func parsePeopleCreditJSON(peopleCreditJSON : JSON) -> PeopleCredit {
+        return PeopleCredit(id : peopleCreditJSON["id"].intValue,
+                            title : peopleCreditJSON["title"].stringValue,
+                            character : peopleCreditJSON["character"].stringValue,
+                            release_date : DateUtils.stringToDate(dateString: peopleCreditJSON["release_date"].stringValue),
+                            poster_path : peopleCreditJSON["poster_path"].stringValue)
+    }
+    
+    
+    
+    
+    
+    
+    
     
     
 }

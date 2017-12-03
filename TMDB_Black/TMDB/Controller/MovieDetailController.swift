@@ -94,4 +94,10 @@ UICollectionViewDelegateFlowLayout {
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let viewModel = creditArrayDataSource?.itemAt(at: indexPath) {
+            movieDetailPresenter?.personSelected(viewModel: viewModel)
+        }
+    }
+    
 }

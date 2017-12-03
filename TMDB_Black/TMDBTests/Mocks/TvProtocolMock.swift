@@ -5,6 +5,14 @@ protocol TvMockProtocol : TvProtocol {
     func getViewModels() -> [TvViewModel]
 }
 class TvProtocolMock : TvMockProtocol {
+    func initializeSegmentControl() {
+        
+    }
+    
+    func initializeLoadingIndicator() {
+        
+    }
+    
     
     
     

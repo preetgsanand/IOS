@@ -18,5 +18,9 @@ protocol MovieSearchNavigationProtocol : MovieNavigationProtocol {
 
 protocol HomeNavigationProtocol {
     func createHomeModule() -> UIViewController
-    func presentGenreMovies(fromView: HomeProtocol, genreId : Int)
+    func presentGenreMovies(fromView: Any?, genreId : Int)
+}
+
+protocol PeopleNavigationProtocol {
+    func presentPeopleDetail(fromView : Any?, peopleId : Int)
 }

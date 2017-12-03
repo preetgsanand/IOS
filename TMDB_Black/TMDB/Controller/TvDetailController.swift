@@ -142,6 +142,14 @@ extension TvDetailController : UICollectionViewDelegate, UICollectionViewDelegat
         return CGSize(width : 0,
                       height : 0)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == castCollection {
+            if let viewModel = creditArrayDataSource?.itemAt(at: indexPath) {
+                presenter?.personSelected(viewModel: viewModel)
+            }
+        }
+    }
 }
 
 

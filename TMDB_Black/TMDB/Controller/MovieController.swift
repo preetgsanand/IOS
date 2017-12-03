@@ -12,12 +12,16 @@ class MovieController: UIViewController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         segmentControl = UISegmentedControl(items : ["Now","Popular","Top","Upcoming"])
+        loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        loadingIndicator?.hidesWhenStopped = true
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
     }
     
     required init?(coder aDecoder: NSCoder) {
         segmentControl = UISegmentedControl(items : ["Now","Popular","Top","Upcoming"])
+        loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        loadingIndicator?.hidesWhenStopped = true
         super.init(coder: aDecoder)
     }
     
@@ -49,12 +53,10 @@ class MovieController: UIViewController {
     
     
     func initializeUI () {
+        loadingIndicator?.center = self.view.center
         moviePresenter?.view = self
         movieCollection?.delegate = self
         
-        loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
-        loadingIndicator?.center = self.view.center
-        loadingIndicator?.hidesWhenStopped = true
     }
 }
 

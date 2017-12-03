@@ -28,6 +28,10 @@ protocol TvNavigationMockProtocol : TvNavigationProtocol {
     func getDetailPressed() -> Bool
 }
 class TvNavigationMock : TvNavigationMockProtocol {
+    func presentSeasonDetailModule(fromView: Any?, tvId: Int, seasons: [SeasonViewModel]) {
+        
+    }
+    
     
     var detailPresented : Bool = false
 

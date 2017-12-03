@@ -37,3 +37,8 @@ class ListArrayDataSource : TableDataSource<ListViewModel, ListCell> {
 class GenreDataSource : CollectionDataSource<GenreViewModel, GenreCell> {
     
 }
+
+
+class PeopleCreditDataSource : CollectionDataSource<PeopleCreditViewModel, PeopleDetailCreditCell> {
+    
+}

@@ -4,6 +4,7 @@ class MoviePresenter : PresenterApiProtocol{
     
     
     func publishApiResponse(_ success: Bool, _ code : Int,_ data: Any?) {
+        loader.hideLoading()
         switch code {
         case 0:
             if success,let movies = data as? [Movie] {
@@ -41,7 +42,6 @@ class MoviePresenter : PresenterApiProtocol{
     
     func viewDidLoad() {
         self.view.initializeSegmentControl()
-        loader.showLoading()
         callMovieApi(position: 0)
     }
     
@@ -77,6 +77,7 @@ class MoviePresenter : PresenterApiProtocol{
     }
     
     func callMovieApi(position : Int) {
+        loader.showLoading()
         self.page = 1
         setViewTitleForPoisition(position: position)
         createServiceForSegment(position: position, page: self.page, publishCode: 0)
